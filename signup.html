@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <!-- Bootstrap stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Tachyons link -->
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <!-- My styleSheet -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <!-- Font family -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>sign up</title>
+  </head>
+  <body>
+    <div class="container signing">
+      <a href="https://tableready.net/">
+        <img src="logo.png" class="rounded mx-auto d-block" alt="TablesReady Waitlist App logo" >
+      </a>
+      <h4>Create your account</h4>
+      <form class="needs-validation" id="singup_form" method="POST" action="/create-post" novalidate>
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="fname">First Name</label>
+            <input type="text"  name="fname" id="fname" class="form-control" placeholder="" required>
+            <div class="invalid-feedback">
+              First Name is required
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="lname">Last Name</label>
+            <input type="text" name="lname" id="lname" class="form-control" placeholder="" required>
+            <div class="invalid-feedback">
+              Last Name is required
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="Email">Email</label>
+            <input type="email" name="Email" id="email" class="form-control" placeholder="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+            <div class="invalid-feedback">
+              Please enter email in the correct format
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="pass">Password</label>
+            <input type="password" name="pass" id="pass" class="form-control" placeholder="" required>
+            <div class="invalid-feedback">
+              Please choose your password
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4">
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" class="form-control" placeholder="" required>
+            <div class="invalid-feedback">
+              First Name is required
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="state">State</label>
+            <input type="text" name="state" id="state" class="form-control" placeholder="" required>
+            <div class="invalid-feedback">
+              Last Name is required
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="zip">Zip</label>
+            <input type="text" name="zip" id="zip" class="form-control" placeholder="" required>
+            <div class="invalid-feedback">
+              Last Name is required
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <button type="submit" class="">Sign up</button>
+        </div>
+        <h3 id="message"></h3>
+      </form>
+      <div  class="d-flex justify-content-center">
+        <a href="/login">Back to Login</a>
+      </div>
+
+      <script>
+
+     
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }else{
+                  event.preventDefault(); // don't let form submit to action UR
+
+                var data={
+                        fname: $('#fname').val(),
+                        lname: $('#lname').val(),
+                        email: $('#email').val(),
+                        pass:$('#pass').val(),
+                        city:  $('#city').val(),
+                        state: $('state').val(),
+                        zip :$('zip').val()
+                        };
+                $.post("/create-post", data, function(data){
+                  
+                  data = JSON.parse(data);
+                if(data.result) $(`#message`).html(`User ${data.result.ops[0].fname} ${data.result.ops[0].lname} has been added to our system.`)
+                else if(data.duplicate) $(`#message`).html(`User ${$('#email').val()} has been already Registered.`)
+                else  $(`#message`).html(`Something went wrong!`)
+              });
+                }
+
+
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+      </script>
+    </div><!--class = container -->
+  </body>
+</html>

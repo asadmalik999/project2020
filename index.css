@@ -1,0 +1,75 @@
+html,body{
+  height: 100%;
+  display: grid;
+}
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  position: relative;
+}
+body::after{
+  content: "";
+  background-image: url(images/background.jpeg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; //to make this img behind the content
+}
+img{
+  max-height: 140px;
+  height: auto;
+  width: auto;
+  max-width: 300px;
+  padding-top: 20px;
+}
+input{
+  border-radius: 8px;
+  border: solid;
+  border-color: #e6e6e6;
+  margin: 0px;
+  height: 50px;
+  width: 500px;
+}
+label{
+  font-weight: bold;
+}
+button{
+  height: 50px;
+  width: 500px;
+  background-color: #cc0044;
+  border-style: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.form-row{
+  margin: 0px;
+  padding-top: 15px;
+}
+h4{
+  padding-top: 10px;
+}
+a{
+  padding-bottom: 10px;
+}
+.loging{
+  margin: auto;
+  border-radius: 15px;
+  background-color: white;
+  width: 350px;
+}
+.signing{
+  margin: auto;
+  border-radius: 15px;
+  background-color: white;
+  max-width: 550px;
+}
