@@ -1,0 +1,3 @@
+1-In signup attribute state and zip is not added in database 
+2-In signin (index.xhtml) when we click on signin button its throw error on browers console that reference not found. don't knw why email id is not found
+3.after signin we have to redirect to a new page where all record shows in grid format .
